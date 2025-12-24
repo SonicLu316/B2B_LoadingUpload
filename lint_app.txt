@@ -1,0 +1,78 @@
+
+D:\專案文件\B2B SamartPlarm\code2\B2B_LoadingUpload\App.tsx
+   73:16   error  Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          @typescript-eslint/no-explicit-any
+   95:60   error  Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+D:\專案文件\B2B SamartPlarm\code2\B2B_LoadingUpload\App.tsx:95:60
+  93 |       if (!workingData.photos[step.id]?.file) {
+  94 |         errors.push(`照片未完成: ${step.label}`);
+> 95 |         if (!firstMissingRef) firstMissingRef = { current: stepRefs.current[step.id] };
+     |                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^ Cannot access ref value during render
+  96 |         break;
+  97 |       }
+  98 |     }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  react-hooks/refs
+  512:22   error  Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+D:\專案文件\B2B SamartPlarm\code2\B2B_LoadingUpload\App.tsx:512:22
+  510 |                 <button onClick={handleSmartNavigation} className="flex flex-col items-center gap-2 group">
+  511 |                   <div className={`p-4 rounded-full border-2 transition-all shadow-sm ${validation.isValid ? 'border-green-200 bg-green-50 text-green-600' : 'border-blue-200 bg-blue-50 text-blue-600'}`}>
+> 512 |                     {validation.isValid ? <ChevronUp size={24} /> : <Search size={24} />}
+      |                      ^^^^^^^^^^^^^^^^^^ Cannot access ref value during render
+  513 |                   </div>
+  514 |                   <span className="text-xs font-black text-slate-400 group-hover:text-blue-600">
+  515 |                     {validation.isValid ? "內容已齊全，回到頂部" : "前往下一個未完成項目"}                                                                                                                                                                                      react-hooks/refs
+  515:22   error  Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+D:\專案文件\B2B SamartPlarm\code2\B2B_LoadingUpload\App.tsx:515:22
+  513 |                   </div>
+  514 |                   <span className="text-xs font-black text-slate-400 group-hover:text-blue-600">
+> 515 |                     {validation.isValid ? "內容已齊全，回到頂部" : "前往下一個未完成項目"}
+      |                      ^^^^^^^^^^^^^^^^^^ Cannot access ref value during render
+  516 |                   </span>
+  517 |                 </button>
+  518 |               </div>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               react-hooks/refs
+  540:46   error  Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+D:\專案文件\B2B SamartPlarm\code2\B2B_LoadingUpload\App.tsx:540:46
+  538 |                   <button 
+  539 |                     onClick={handleSubmit} 
+> 540 |                     disabled={hasChanges || !validation.isValid || isSubmitting} 
+      |                                              ^^^^^^^^^^^^^^^^^^ Cannot access ref value during render
+  541 |                     className={`flex-[1.5] py-4 rounded-2xl font-black flex items-center justify-center gap-2 transition-all ${(!hasChanges && validation.isValid) ? 'bg-blue-600 text-white shadow-lg shadow-blue-200 active:scale-95 hover:bg-blue-700' : 'bg-slate-200 text-slate-400'}`}
+  542 |                   >
+  543 |                     {isSubmitting ? <Loader2 className="animate-spin" size={20} /> : <Send size={20}/>}                                                                                                                                                                                               react-hooks/refs
+  541:129  error  Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+D:\專案文件\B2B SamartPlarm\code2\B2B_LoadingUpload\App.tsx:541:129
+  539 |                     onClick={handleSubmit} 
+  540 |                     disabled={hasChanges || !validation.isValid || isSubmitting} 
+> 541 |                     className={`flex-[1.5] py-4 rounded-2xl font-black flex items-center justify-center gap-2 transition-all ${(!hasChanges && validation.isValid) ? 'bg-blue-600 text-white shadow-lg shadow-blue-200 active:scale-95 hover:bg-blue-700' : 'bg-slate-200 text-slate-400'}`}
+      |                                                                                                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Cannot access ref value during render
+  542 |                   >
+  543 |                     {isSubmitting ? <Loader2 className="animate-spin" size={20} /> : <Send size={20}/>}
+  544 |                     {isSubmitting ? '傳送中...' : hasChanges ? '[請先暫存]' : validation.isValid ? '[確認全數送出]' : '[數量尚未齊全]'}  react-hooks/refs
+  544:72   error  Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+D:\專案文件\B2B SamartPlarm\code2\B2B_LoadingUpload\App.tsx:544:72
+  542 |                   >
+  543 |                     {isSubmitting ? <Loader2 className="animate-spin" size={20} /> : <Send size={20}/>}
+> 544 |                     {isSubmitting ? '傳送中...' : hasChanges ? '[請先暫存]' : validation.isValid ? '[確認全數送出]' : '[數量尚未齊全]'}
+      |                                                                        ^^^^^^^^^^^^^^^^^^ Cannot access ref value during render
+  545 |                   </button>
+  546 |                 </div>
+  547 |               </div>                                                                                                                                                                                                                                                                                                                                                                                                                              react-hooks/refs
+
+✖ 7 problems (7 errors, 0 warnings)
+

@@ -11,9 +11,11 @@ export interface PhotosState {
 }
 
 export interface RecordData {
+  id?: string;
   poNumber: string;
   shippingLocation: string;
   photos: PhotosState;
+  status?: 'COMPLETED' | 'DRAFT' | 'PENDING';
 }
 
 export interface ContainerRecord {
