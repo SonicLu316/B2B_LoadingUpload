@@ -178,8 +178,39 @@ const App = () => {
   };
 
   const handleSaveDraft = () => {
-    setSavedData({ ...workingData });
-    showAlert("暫存成功", "您的進度已成功記錄在本地暫存空間。", "success");
+    setIsSubmitting(true);
+    // 模擬伺服器儲存延遲
+    setTimeout(() => {
+      const isNew = !workingData.id;
+      const recordId = workingData.id || Date.now().toString();
+      const now = new Date().toLocaleString('zh-TW', { hour12: false }).replace(/\//g, '-');
+
+      const updatedRecord: ContainerRecord = {
+        id: recordId,
+        poNumber: workingData.poNumber,
+        shippingLocation: workingData.shippingLocation,
+        photoCount: Object.keys(workingData.photos).filter(k => !!workingData.photos[Number(k)]?.file).length,
+        status: 'DRAFT',
+        updatedAt: now
+      };
+
+      setContainerRecords(prev => {
+        if (isNew) return [updatedRecord, ...prev];
+        return prev.map(r => r.id === recordId ? updatedRecord : r);
+      });
+
+      // 更新本地工作狀態
+      const newSavedData: RecordData = {
+        ...workingData,
+        id: recordId,
+        status: 'DRAFT'
+      };
+      setSavedData(newSavedData);
+      setWorkingData(newSavedData);
+      setIsSubmitting(false);
+
+      showAlert("暫存成功", "資料已成功儲存至伺服器 (Status: DRAFT)。", "success");
+    }, 600);
   };
 
   const handleReset = () => {
@@ -203,18 +234,26 @@ const App = () => {
 
       // 模擬網路延遲
       setTimeout(() => {
+        const recordId = workingData.id || Date.now().toString();
+        const now = new Date().toLocaleString('zh-TW', { hour12: false }).replace(/\//g, '-');
+
         const newRecord: ContainerRecord = {
-          id: Date.now().toString(),
+          id: recordId,
           poNumber: workingData.poNumber,
           shippingLocation: workingData.shippingLocation,
           photoCount: validation.photoCount,
           status: 'COMPLETED',
-          updatedAt: new Date().toLocaleString('zh-TW', { hour12: false }).replace(/\//g, '-')
+          updatedAt: now
         };
 
-        // Remove old record if it exists (update scenario) or add new
-        // For simplicity, we just unshift the new one, but in a real app we'd check ID.
-        setContainerRecords(prev => [newRecord, ...prev]);
+        setContainerRecords(prev => {
+          // 如果是已經存在的草稿，則更新它；如果是全新的，則新增
+          const exists = prev.some(r => r.id === recordId);
+          if (exists) {
+            return prev.map(r => r.id === recordId ? newRecord : r);
+          }
+          return [newRecord, ...prev];
+        });
 
         const emptyState: RecordData = { poNumber: '', shippingLocation: '', photos: {} };
         setSavedData(emptyState);
@@ -347,7 +386,7 @@ const App = () => {
               )}
             </button>
             <h2 className="text-lg font-black text-slate-800">
-              {savedData.status === 'COMPLETED' 
+              {savedData.status === 'COMPLETED'
                 ? '裝櫃紀錄查閱'
                 : savedData.poNumber ? '編輯裝櫃紀錄' : '新增裝櫃紀錄'}
             </h2>
@@ -437,8 +476,9 @@ const App = () => {
 
             <button
               onClick={() => {
-                setSavedData({ poNumber: '', shippingLocation: '', photos: {} });
-                setWorkingData({ poNumber: '', shippingLocation: '', photos: {} });
+                const empty: RecordData = { poNumber: '', shippingLocation: '', photos: {} };
+                setSavedData(empty);
+                setWorkingData(empty);
                 setView('UPLOAD');
               }}
               className="fixed bottom-8 right-8 w-16 h-16 bg-blue-600 text-white rounded-full shadow-lg flex items-center justify-center active:scale-90 transition-all z-50 hover:bg-blue-700 hover:scale-105"
