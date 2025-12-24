@@ -1,0 +1,5 @@
+{
+  "name": "ContainerLog",
+  "description": "A comprehensive container loading management system allowing users to track progress, upload photos step-by-step, and manage shipment records with a mobile-first interface.",
+  "requestFramePermissions": []
+}
